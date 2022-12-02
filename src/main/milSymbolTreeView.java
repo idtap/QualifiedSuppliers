@@ -2,10 +2,8 @@ package main;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.ResourceBundle;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -16,13 +14,10 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 
+import controller.FilterableTreeItem;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import main.milSymbolCheckboxTreeView.SymbolSelectedEventHandler;
 import tool.Event;
 
 //this.item.setExpanded(true);
@@ -43,12 +38,14 @@ public class milSymbolTreeView {
 			listener.invoke(SIC, Shape);
 		}
 	}
+	
+	public FilterableTreeItem<String> rootXML;
 
 	public TreeView<String> treeView;
 
 	public HashMap<String, milSymbolCode> milSymbol = new HashMap<String, milSymbolCode>();
 
-	public void handleSelectedEvent(TreeItem<String> selectedItem) {
+	public void handleSelectedEvent(FilterableTreeItem<String> selectedItem) {
 		if (selectedItem == null || !selectedItem.isLeaf())
 			return;
 
@@ -60,19 +57,19 @@ public class milSymbolTreeView {
 		}
 	}
 
-	public TreeItem<String> readData(File file) throws SAXException, ParserConfigurationException, IOException {
+	public FilterableTreeItem<String> readData(File file) throws SAXException, ParserConfigurationException, IOException {
 		SAXParserFactory parserFactory = SAXParserFactory.newInstance();
 		SAXParser parser = parserFactory.newSAXParser();
 		XMLReader reader = parser.getXMLReader();
 		TreeItemCreationContentHandler contentHandler = new TreeItemCreationContentHandler();
 
-		// parse file using the content handler to create a TreeItem representation
+		// parse file using the content handler to create a FilterableTreeItem representation
 		reader.setContentHandler(contentHandler);
 		reader.parse(file.toURI().toString());
 
-		// use first child as root (the TreeItem initially created does not contain data
+		// use first child as root (the FilterableTreeItem initially created does not contain data
 		// from the file)
-		TreeItem<String> item = contentHandler.item.getChildren().get(0);
+		FilterableTreeItem<String> item = (FilterableTreeItem<String>)contentHandler.item.getChildren().get(0);
 		contentHandler.item.getChildren().clear();
 		return item;
 	}
@@ -83,7 +80,7 @@ public class milSymbolTreeView {
 	private void drawTreeView(File file) {
 		try {
 			
-			TreeItem<String> rootXML = readData(file);
+			rootXML = readData(file);
 			rootXML.setExpanded(true);
 
 			if (treeView == null)
@@ -95,7 +92,7 @@ public class milSymbolTreeView {
 				public void changed(@SuppressWarnings("rawtypes") ObservableValue observable, Object oldValue,
 						Object newValue) {
 
-					TreeItem<String> selectedItem = (TreeItem<String>) newValue;
+					FilterableTreeItem<String> selectedItem = (FilterableTreeItem<String>) newValue;
 					handleSelectedEvent(selectedItem);
 				}
 			});
@@ -118,12 +115,12 @@ public class milSymbolTreeView {
 
 	private class TreeItemCreationContentHandler extends DefaultHandler {
 
-		private TreeItem<String> item = new TreeItem<String>();
+		private FilterableTreeItem<String> item = new FilterableTreeItem<String>("");
 
 		@Override
 		public void endElement(String uri, String localName, String qName) throws SAXException {
 			// finish this node by going back to the parent
-			this.item = (TreeItem<String>) this.item.getParent();
+			this.item = (FilterableTreeItem<String>) this.item.getParent();
 		}
 
 		@Override
@@ -131,8 +128,8 @@ public class milSymbolTreeView {
 				throws SAXException {
 			// start a new node and use it as the current item
 			String cname = attributes.getValue("text");
-			TreeItem<String> item = new TreeItem<String>(cname);
-			this.item.getChildren().add(item);
+			FilterableTreeItem<String> item = new FilterableTreeItem<String>(cname);
+			this.item.getInternalChildren().add(item);
 			this.item = item;
 
 			if (attributes.getLength() > 1) {
@@ -147,7 +144,7 @@ public class milSymbolTreeView {
 			String s = String.valueOf(ch, start, length).trim();
 			if (!s.isEmpty()) {
 				// add text content as new child
-				this.item.getChildren().add(new TreeItem<String>(s));
+				this.item.getInternalChildren().add(new FilterableTreeItem<String>(s));
 			}
 		}
 

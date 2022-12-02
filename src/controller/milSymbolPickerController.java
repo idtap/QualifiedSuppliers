@@ -1,37 +1,21 @@
 package controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
-import demoApp.FilterableTreeItem;
-import demoApp.TreeItemPredicate;
-import demoApp.FilterableTreeItemSample.Actor;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TitledPane;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.milSymbolTreeView;
-import main.perferCode;
-import tool.Event;
 
 public class milSymbolPickerController implements Initializable {
 
@@ -99,6 +83,7 @@ public class milSymbolPickerController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		setUserComponents();
+		createFilteredTree();
 	}
 
 	private void setUserComponents() {
@@ -136,21 +121,13 @@ public class milSymbolPickerController implements Initializable {
 		this.selectedShape = Shape;
 	}
 
-    private Node createFilteredTree() {
-        FilterableTreeItem<Actor> root = getTreeModel();
+    private void createFilteredTree() {
+        FilterableTreeItem<String> root = milSymbolTreeView.rootXML;
         root.predicateProperty().bind(Bindings.createObjectBinding(() -> {
             if (filterField.getText() == null || filterField.getText().isEmpty())
                 return null;
             return TreeItemPredicate.create(actor -> actor.toString().contains(filterField.getText()));
         }, filterField.textProperty()));
-        
-        TreeView<Actor> treeView = new TreeView<>(root);
-        treeView.setShowRoot(false);
-        
-        TitledPane pane = new TitledPane("Filtered TreeView", treeView);
-        pane.setCollapsible(false);
-        pane.setMaxHeight(Double.MAX_VALUE);
-        return pane;
     }
 	
 }
