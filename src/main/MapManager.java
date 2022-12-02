@@ -121,13 +121,17 @@ public class MapManager {
 			graphicsOverlay_military_3Dsymbol.getSceneProperties().setSurfacePlacement(SurfacePlacement.ABSOLUTE);
 			sceneView.getGraphicsOverlays().add(graphicsOverlay_military_3Dsymbol);
 
-			TileCache tileCache_Raster3D = new TileCache(mapPath + "/raster-L11.tpk");
+			TileCache tileCache_Raster3D = new TileCache("C:\\TEST\\Map3D\\basemap\\全球亮灰階底圖.tpkx");
 			ArcGISTiledLayer tiledLayer_Raster3D = new ArcGISTiledLayer(tileCache_Raster3D);
 			Basemap basemap_Raster3D = new Basemap(tiledLayer_Raster3D);
-
-			TileCache twCache_Raster3D = new TileCache(mapPath + "/台灣區域衛星影像.tpk");
-			ArcGISTiledLayer twLayer_Raster3D = new ArcGISTiledLayer(twCache_Raster3D);
-			basemap_Raster3D.getBaseLayers().add(twLayer_Raster3D);
+			
+//			TileCache tileCache_Raster3D = new TileCache(mapPath + "/raster-L11.tpk");
+//			ArcGISTiledLayer tiledLayer_Raster3D = new ArcGISTiledLayer(tileCache_Raster3D);
+//			Basemap basemap_Raster3D = new Basemap(tiledLayer_Raster3D);
+//
+//			TileCache twCache_Raster3D = new TileCache(mapPath + "/台灣區域衛星影像.tpk");
+//			ArcGISTiledLayer twLayer_Raster3D = new ArcGISTiledLayer(twCache_Raster3D);
+//			basemap_Raster3D.getBaseLayers().add(twLayer_Raster3D);
 
 			arcgisScene.setBasemap(basemap_Raster3D);
 

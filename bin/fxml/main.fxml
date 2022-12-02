@@ -38,7 +38,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17.0.2" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane fx:id="mapPane" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Accordion prefHeight="562.0" prefWidth="183.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="10.0">
@@ -54,6 +54,7 @@
                               <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handle3DClicked" prefHeight="30.0" prefWidth="100.0" text="預設場景" />
                               <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleWorldClicked" prefHeight="30.0" prefWidth="100.0" text="全景地圖" />
                               <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handle2DClicked" prefHeight="30.0" prefWidth="100.0" text="2D" />
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handlePrint2DClicked" prefHeight="30.0" prefWidth="100.0" text="列印" />
                            </children>
                         </VBox>
                      </children>

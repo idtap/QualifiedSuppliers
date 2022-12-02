@@ -27,6 +27,8 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
 
+import javax.imageio.ImageIO;
+
 import com.esri.arcgisruntime.ArcGISRuntimeEnvironment;
 import com.esri.arcgisruntime.concurrent.ListenableFuture;
 import com.esri.arcgisruntime.data.TileCache;
@@ -83,6 +85,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -104,6 +107,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -748,6 +752,32 @@ public class mainController implements Initializable {
 		});
 	}
 
+	@FXML
+	void handlePrint2DClicked(ActionEvent event) {
+		// create a file chooser for saving image
+	      final FileChooser fileChooser = new FileChooser();
+	      fileChooser.setInitialFileName("map-screenshot");
+	      fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG file (*.png)", "*.png"));
+		
+		
+		// export image from map view
+        ListenableFuture<Image> mapImage = MapManager.getSceneView().exportImageAsync();
+        mapImage.addDoneListener(() -> {
+          try {
+            // get image
+            Image image = mapImage.get();
+            // choose a location to save the file
+            File file = fileChooser.showSaveDialog(_stage_main);
+            if (file != null) {
+              // write the image to the save location
+              ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
+            }
+          } catch (Exception ex) {
+            ex.printStackTrace();
+          }
+        });
+	}
+	
 	@FXML
 	void handleWorldClicked(ActionEvent event) {
 		MapManager.getSceneView().setViewpointAsync(MapManager.getSceneView().getArcGISScene().getInitialViewpoint(), 2.0f);
