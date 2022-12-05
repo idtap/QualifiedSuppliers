@@ -18,17 +18,27 @@
    <children>
       <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
-            <AnchorPane prefHeight="250.0" prefWidth="250.0" style="-fx-background-color: blue;" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="478.0" prefWidth="250.0" BorderPane.alignment="CENTER">
                <children>
-                  <TitledPane animated="false" collapsible="false" text="符號庫" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <content>
-                        <AnchorPane fx:id="milTreeView" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <padding>
-                              <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0" />
-                           </padding>
-                        </AnchorPane>
-                     </content>
-                  </TitledPane>
+                  <VBox prefHeight="478.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <HBox prefHeight="29.0" prefWidth="800.0" spacing="2.0">
+                           <children>
+                              <Label text="關鍵字搜尋:" />
+                              <TextField fx:id="filterField" />
+                           </children>
+                        </HBox>
+                        <TitledPane animated="false" collapsible="false" prefHeight="452.0" prefWidth="264.0" text="符號庫">
+                           <content>
+                              <AnchorPane fx:id="milTreeView" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <padding>
+                                    <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0" />
+                                 </padding>
+                              </AnchorPane>
+                           </content>
+                        </TitledPane>
+                     </children>
+                  </VBox>
                </children>
             </AnchorPane>
          </left>
@@ -39,7 +49,6 @@
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="568.0" minHeight="10.0" prefHeight="400.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="400.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                 <AnchorPane fx:id="sidcPane" maxHeight="1.7976931348623157E308" prefHeight="950.0" prefWidth="724.0" GridPane.rowIndex="0" />
@@ -48,14 +57,10 @@
             </GridPane>
          </center>
          <bottom>
-            <VBox prefHeight="187.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="141.0" prefWidth="800.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox prefHeight="29.0" prefWidth="800.0" spacing="2.0">
-                     <children>
-                        <Label text="關鍵字搜尋:" />
-                        <TextField fx:id="filterField" />
-                     </children>
-                  </HBox>
+                  <Label text="常用清單" />
+                  <ListView fx:id="listFavorite" prefHeight="200.0" prefWidth="200.0" />
                   <HBox alignment="TOP_RIGHT" prefHeight="32.0" prefWidth="800.0" spacing="3.0">
                      <children>
                         <Button fx:id="btnOK" mnemonicParsing="false" onAction="#handkebtnOKClicked" text="確認" />

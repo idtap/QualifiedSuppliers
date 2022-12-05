@@ -17,10 +17,12 @@ import org.xml.sax.helpers.DefaultHandler;
 import controller.FilterableTreeItem;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeView;
+import javafx.util.Callback;
 import tool.Event;
-
-//this.item.setExpanded(true);
 
 public class milSymbolTreeView {
 
@@ -29,7 +31,7 @@ public class milSymbolTreeView {
 		void invoke(String SIC, String Shape);
 	}
 
-	/** 威脅情資更新通知 */
+	/** 選擇符號通知 */
 	public static Event<SymbolSelectedEventHandler> SymbolSelectedEvent = new Event<SymbolSelectedEventHandler>();
 
 	private void RaiseSymbolSelectedEvent(String SIC, String Shape) {
@@ -39,18 +41,39 @@ public class milSymbolTreeView {
 		}
 	}
 	
+	@FunctionalInterface
+	public interface SymbolAddFavoriteEventHandler {
+		void invoke(String key, milSymbolCode attr);
+	}
+	
+	/** 加入常用通知 */
+	public static Event<SymbolAddFavoriteEventHandler> SymbolAddFavoriteEvent = new Event<SymbolAddFavoriteEventHandler>();
+
+	private void RaiseSymbolAddFavoriteEvent(String key, milSymbolCode attr) {
+		// invoke all listeners:
+		for (SymbolAddFavoriteEventHandler listener : SymbolAddFavoriteEvent.listeners()) {
+			listener.invoke(key, attr);
+		}
+	}
+	
+	
+	/** TreeView root item */
 	public FilterableTreeItem<String> rootXML;
 
 	public TreeView<String> treeView;
 
+	/** key:軍隊符號太空航跡衛星 , value:milSymbolCode  */
 	public HashMap<String, milSymbolCode> milSymbol = new HashMap<String, milSymbolCode>();
 
+	public FilterableTreeItem<String> selectedItem;
+	
 	public void handleSelectedEvent(FilterableTreeItem<String> selectedItem) {
+		this.selectedItem = selectedItem;
 		if (selectedItem == null || !selectedItem.isLeaf())
 			return;
 
-		String key = (selectedItem.getParent().getParent() != null ? selectedItem.getParent().getParent().getValue()
-				: "") + selectedItem.getParent().getValue() + selectedItem.getValue();
+		String key = getNodeParentKey(selectedItem, "") + "-" + selectedItem.getValue();
+		
 		if (milSymbol.containsKey(key)) {
 			milSymbolCode attr = milSymbol.get(key);
 			RaiseSymbolSelectedEvent(attr.getCode(), attr.getShape());
@@ -97,6 +120,28 @@ public class milSymbolTreeView {
 				}
 			});
 
+			treeView.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>() {
+				@Override
+				public TreeCell<String> call(TreeView<String> p) {
+					TreeCell<String> cell = new TreeCell<String>() {
+						@Override
+						public void updateItem(String value, boolean empty) {
+							super.updateItem(value, empty);
+							if (empty) {
+								setText(null);
+							} else {
+								setText(value.toString());
+							}
+						}
+					};
+					
+					ContextMenu cm = createContextMenu(cell);
+					cell.setContextMenu(cm);
+					return cell;
+				}
+			});
+			
+			
 			treeView.setShowRoot(true);
 			treeView.refresh();
 
@@ -105,6 +150,37 @@ public class milSymbolTreeView {
 		}
 	}
 
+	/*
+	 * 為透明圖群組清單建立子選單
+	 */
+	private ContextMenu createContextMenu(TreeCell<String> item) {
+		ContextMenu cm = new ContextMenu();
+		MenuItem openItem = new MenuItem("加入常用清單");
+		
+		openItem.setOnAction(event -> {
+			if (selectedItem == null || !selectedItem.isLeaf())
+				return;
+
+			String key = getNodeParentKey(selectedItem, "") + "-" + selectedItem.getValue();
+			
+			if (milSymbol.containsKey(key)) {
+				milSymbolCode attr = milSymbol.get(key);
+				RaiseSymbolAddFavoriteEvent(key, attr);
+			}
+		});
+		cm.getItems().add(openItem);
+		// other menu items...
+		return cm;
+	}
+	
+	public String getNodeParentKey(FilterableTreeItem item, String key) {
+		if (item.getParent().getValue().toString().indexOf("MIL-STD") < 0) {
+			return getNodeParentKey((FilterableTreeItem)item.getParent(), "-" + item.getParent().getValue() + key);
+		} else {
+			return key;
+		}
+	}
+	
 	public milSymbolTreeView() {
 		
 		File file = new File(System.getProperty("data.dir"),
@@ -133,12 +209,11 @@ public class milSymbolTreeView {
 			this.item = item;
 
 			if (attributes.getLength() > 1) {
-				String key = (item.getParent().getParent() != null ? item.getParent().getParent().getValue() : "")
-						+ item.getParent().getValue() + cname;
+				String key = getNodeParentKey(item, "")  + "-" + cname;
 				milSymbol.put(key, new milSymbolCode(cname, attributes.getValue("name"), attributes.getValue("shape")));
 			}
 		}
-
+		
 		@Override
 		public void characters(char[] ch, int start, int length) throws SAXException {
 			String s = String.valueOf(ch, start, length).trim();
@@ -147,7 +222,14 @@ public class milSymbolTreeView {
 				this.item.getInternalChildren().add(new FilterableTreeItem<String>(s));
 			}
 		}
-
+		
+		public String getNodeParentKey(FilterableTreeItem item, String key) {
+			if (item.getParent().getValue().toString().indexOf("MIL-STD") < 0) {
+				return getNodeParentKey((FilterableTreeItem)item.getParent(), "-" + item.getParent().getValue() + key);
+			} else {
+				return key;
+			}
+		}
 	}
 
 }

@@ -48,8 +48,10 @@ public class milSymbolCheckboxTreeView {
 
 	public TreeView<String> treeView;
 
+	/**  */
 	public HashMap<String, milSymbolCode> milSymbol = new HashMap<String, milSymbolCode>();
 
+	/** 當使用者點選TreeView Item */
 	public void handleSelectedEvent(TreeItem<String> selectedItem) {
 		if (!selectedItem.isLeaf())
 			return;
@@ -63,6 +65,7 @@ public class milSymbolCheckboxTreeView {
 		}
 	}
 
+	/** 讀取FX.XML(2525B清單檔) */
 	public TreeItem<String> readData(File file) throws SAXException, ParserConfigurationException, IOException {
 		SAXParserFactory parserFactory = SAXParserFactory.newInstance();
 		SAXParser parser = parserFactory.newSAXParser();

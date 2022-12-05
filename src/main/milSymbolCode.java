@@ -5,8 +5,11 @@ import javafx.scene.control.TreeItem;
 
 public class milSymbolCode {
 
+	/** 中文名稱 */
     private final SimpleStringProperty name;
+    /** 2525B 15碼 */
     private final SimpleStringProperty code;
+    /** 形狀(POINT、LINE、AREA) */
     private final SimpleStringProperty shape;
 
     public milSymbolCode(String name, String code,String shape) {
