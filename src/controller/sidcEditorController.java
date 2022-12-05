@@ -492,7 +492,7 @@ public class sidcEditorController implements Initializable {
 	}
 
 	private void initDictionarySymbol() {
-		File stylxFile = new File(ArcGISRuntimeEnvironment.getResourcesDirectory() + "/symbols/mil2525c.stylx");
+		File stylxFile = new File(ArcGISRuntimeEnvironment.getResourcesDirectory() + "/symbols/mil2525bc2.stylx");
 		dictionarySymbol = DictionarySymbolStyle.createFromFile(stylxFile.getAbsolutePath());
 		dictionarySymbol.loadAsync();
 	}

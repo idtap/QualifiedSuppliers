@@ -861,12 +861,12 @@ public class MapApp2DController implements Initializable {
 	}
 
 	private void AddMilitarySymbolGraphic() {
-		// 2525C
+		// 2525B
 		Map<String, Object> attributes = new HashMap<>();
 		attributes.put("_type", "position_report");
 		attributes.put("_action", "update");
 		attributes.put("sidc", "SSGPUC-----BTW-");
-		attributes.put("name", "自訂2525C符號");
+		attributes.put("name", "自訂2525B符號");
 
 		Point p = new Point(120.6, 22.4, SpatialReferences.getWgs84());
 

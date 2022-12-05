@@ -54,7 +54,7 @@ public class MapManager {
 			// license with a license key
 			// ArcGISRuntimeEnvironment.setLicense("runtimestandard,1000,rud000528559,none,1JHJH7E3CZ4HH6JRP132");
 
-			File stylxFile = new File(ArcGISRuntimeEnvironment.getResourcesDirectory() + "/symbols/mil2525c.stylx");
+			File stylxFile = new File(ArcGISRuntimeEnvironment.getResourcesDirectory() + "/symbols/mil2525bc2.stylx");
 			dictionarySymbol2D = DictionarySymbolStyle.createFromFile(stylxFile.getAbsolutePath());
 			dictionarySymbol2D.loadAsync();
 
@@ -91,7 +91,7 @@ public class MapManager {
 
 	public static void InitMap3D() {
 		try {
-			File stylxFile = new File(ArcGISRuntimeEnvironment.getResourcesDirectory() + "/symbols/mil2525c.stylx");
+			File stylxFile = new File(ArcGISRuntimeEnvironment.getResourcesDirectory() + "/symbols/mil2525bc2.stylx");
 			dictionarySymbol3D = DictionarySymbolStyle.createFromFile(stylxFile.getAbsolutePath());
 			dictionarySymbol3D.loadAsync();
 

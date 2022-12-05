@@ -91,7 +91,7 @@ class GraphicJson {
 				JSONObject attrObject = new JSONObject(g.getAttributes());
 				String jsonObject = "";
 				if (null == g.getSymbol()) {
-					//2525C Graphic 沒有Symbol
+					//2525B Graphic 沒有Symbol
 					jsonObject = graphicToJson(g.getGeometry().toJson(), "", attrObject.toJSONString());
 				}
 				else if (g.getSymbol().getClass().equals(SimpleMarkerSceneSymbol.class)) {

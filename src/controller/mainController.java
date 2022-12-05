@@ -151,7 +151,7 @@ public class mainController implements Initializable {
 	GraphicsOverlay dropGraphicsOverlay = null; // StackProfile用圖層
 
 	GraphicJson gf = new GraphicJson("Overlay3D.json");
-	GraphicJson gf2525C = new GraphicJson("Overlay2525C.json");
+	GraphicJson gf2525B = new GraphicJson("Overlay2525B.json");
 
 	private boolean blnDrawMilSymbol = false;
 	private Graphic drawingGraphic = null;
@@ -248,7 +248,7 @@ public class mainController implements Initializable {
 		btnComploete.setDisable(true);
 		btnCancel.setDisable(true);
 
-		// 2525C
+		// 2525B
 		Map<String, Object> attributes = new HashMap<>();
 		attributes.put("_type", "position_report");
 		attributes.put("_action", "update");
@@ -256,7 +256,7 @@ public class mainController implements Initializable {
 		attributes.put("datetimevalid", "291122111SEP22"); // 日時組
 		attributes.put("speed", "350"); // 速度
 
-		attributes.put("name", "自訂2525C符號");
+		attributes.put("name", "自訂2525B符號");
 
 		Geometry drawGeometry = null;
 		switch (milSymbolPicker.getSelectedShape()) {
@@ -274,8 +274,8 @@ public class mainController implements Initializable {
 		Graphic millitaryGraphic = new Graphic(drawGeometry, attributes);
 		MapManager.graphicsOverlay_military_3Dsymbol.getGraphics().add(millitaryGraphic);
 
-		// 儲存2525C GraphicOverlay的Graphics到Json檔
-		gf2525C.SaveGraphicsToJsonFile(MapManager.graphicsOverlay_military_3Dsymbol, null);
+		// 儲存2525B GraphicOverlay的Graphics到Json檔
+		gf2525B.SaveGraphicsToJsonFile(MapManager.graphicsOverlay_military_3Dsymbol, null);
 
 		blnDrawMilSymbol = false;
 		selectedSIC = "";
@@ -291,14 +291,14 @@ public class mainController implements Initializable {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/milSymbolPicker.fxml"));
 				loader.setController(milSymbolPicker);
 				Parent root = (Parent) loader.load();
-				Scene scene = new Scene(root, 800, 600);
+				Scene scene = new Scene(root, 800, 660);
 				stagePicker = new Stage();
 				milSymbolPicker.setDialogStage(stagePicker);
 				stagePicker.setScene(scene);
 				stagePicker.initModality(Modality.NONE);
 				stagePicker.setMaximized(false);
 				stagePicker.setResizable(false);
-				stagePicker.setTitle("軍隊符號(2525C)選擇視窗");
+				stagePicker.setTitle("軍隊符號(2525B)選擇視窗");
 				stagePicker.setScene(scene);
 			}
 			stagePicker.showAndWait();
@@ -1574,7 +1574,7 @@ public class mainController implements Initializable {
 		});
 
 		gf.OpenJsonFileImportGraphics(MapManager.graphicsOverlay3D);
-		gf2525C.OpenJsonFileImportGraphicsForMilitarySymbol(MapManager.graphicsOverlay_military_3Dsymbol);
+		gf2525B.OpenJsonFileImportGraphicsForMilitarySymbol(MapManager.graphicsOverlay_military_3Dsymbol);
 
 		// 儲存3D GraphicOverlay的Graphics到Json檔
 		// gf.SaveGraphicsToJsonFile(MapManager.graphicsOverlay3D, null);
