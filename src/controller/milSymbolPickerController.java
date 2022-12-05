@@ -10,6 +10,7 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.ResourceBundle;
@@ -46,7 +47,7 @@ public class milSymbolPickerController implements Initializable {
 	private boolean _applyClicked = false;
 	private String selectedShape = "";
 
-	private Hashtable<String, String> favoriteMap = new Hashtable<>();
+	private Hashtable<String, milSymbolCode> favoriteMap = new Hashtable<>();
 
 	@FXML
 	private Button btnOpen;
@@ -113,7 +114,8 @@ public class milSymbolPickerController implements Initializable {
 		// 常用清單點選項目
 		listFavorite.setOnMouseClicked(event -> {
 			String selectedItem = listFavorite.getSelectionModel().getSelectedItem().toString();
-			sidcEditor.SetSIC(favoriteMap.get(selectedItem));
+			sidcEditor.SetSIC(favoriteMap.get(selectedItem).getCode());
+			selectedShape = favoriteMap.get(selectedItem).getShape();
 		});
 
 		// 常用清單加入子選單
@@ -178,9 +180,10 @@ public class milSymbolPickerController implements Initializable {
 
 			while (keys.hasNext()) {
 				String key = (String) keys.next();
-				String value = result.getString(key);
-				favoriteMap.put(key, value);
-
+				JSONObject jobj = new JSONObject(result.get(key).toString());
+				
+				favoriteMap.put(key, new milSymbolCode(jobj.getString("name"), jobj.getString("code"), jobj.getString("shape")));
+				
 				listFavorite.getItems().add(key);
 			}
 		} catch (Exception ex) {
@@ -243,10 +246,10 @@ public class milSymbolPickerController implements Initializable {
 			return;
 		}
 		
-		favoriteMap.put(key, attr.getCode());
+		favoriteMap.put(key, attr);
 		listFavorite.getItems().add(key);
 
-		try (OutputStreamWriter oos = new OutputStreamWriter(new FileOutputStream("cfg/a.json"), Charset.forName("UTF-8"))) {
+		try (OutputStreamWriter oos = new OutputStreamWriter(new FileOutputStream("cfg/FEfavorite.json"), Charset.forName("UTF-8"))) {
 			JSONObject cacheObject = new JSONObject(favoriteMap);
 			cacheObject.write(oos);
 
