@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="552.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TitledPane animated="false" layoutY="169.0" prefHeight="87.0" prefWidth="552.0" text="圖形代碼" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="170.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="3.0">
+                           <children>
+                              <TextField fx:id="txt01" alignment="CENTER" editable="false" promptText="-" style="-fx-border-color: black;" />
+                              <TextField fx:id="txt02" alignment="CENTER" editable="false" promptText="-" style="-fx-border-color: black;" />
+                              <TextField fx:id="txt03" alignment="CENTER" editable="false" promptText="-" style="-fx-border-color: black;" />
+                              <TextField fx:id="txt04" alignment="CENTER" editable="false" promptText="-" style="-fx-border-color: black;" />
+                              <TextField fx:id="txt05" alignment="CENTER" editable="false" promptText="-" style="-fx-border-color: black;" />
+                              <TextField fx:id="txt06" alignment="CENTER" editable="false" promptText="-" style="-fx-border-color: black;" />
+                              <TextField fx:id="txt07" alignment="CENTER" editable="false" promptText="-" style="-fx-border-color: black;" />
+                              <TextField fx:id="txt08" alignment="CENTER" editable="false" promptText="-" style="-fx-border-color: black;" />
+                              <TextField fx:id="txt09" alignment="CENTER" editable="false" promptText="-" style="-fx-border-color: black;" />
+                              <TextField fx:id="txt10" alignment="CENTER" editable="false" promptText="-" style="-fx-border-color: black;" />
+                              <TextField fx:id="txt11" alignment="CENTER" editable="false" promptText="-" style="-fx-border-color: black;" />
+                              <TextField fx:id="txt12" alignment="CENTER" editable="false" promptText="-" style="-fx-border-color: black;" />
+                              <TextField fx:id="txt13" alignment="CENTER" editable="false" promptText="-" style="-fx-border-color: black;" />
+                              <TextField fx:id="txt14" alignment="CENTER" editable="false" promptText="-" style="-fx-border-color: black;" />
+                              <TextField fx:id="txt15" alignment="CENTER" editable="false" promptText="-" style="-fx-border-color: black;" />
+                           </children>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="3.0" GridPane.rowIndex="1">
+                           <children>
+                              <Label alignment="CENTER" prefWidth="32.0" text="1" />
+                              <Label alignment="CENTER" prefWidth="32.0" text="2" />
+                              <Label alignment="CENTER" prefWidth="32.0" text="3" />
+                              <Label alignment="CENTER" prefWidth="32.0" text="4" />
+                              <Label alignment="CENTER" prefWidth="32.0" text="5" />
+                              <Label alignment="CENTER" prefWidth="32.0" text="6" />
+                              <Label alignment="CENTER" prefWidth="32.0" text="7" />
+                              <Label alignment="CENTER" prefWidth="32.0" text="8" />
+                              <Label alignment="CENTER" prefWidth="32.0" text="9" />
+                              <Label alignment="CENTER" prefWidth="32.0" text="10" />
+                              <Label alignment="CENTER" prefWidth="32.0" text="11" />
+                              <Label alignment="CENTER" prefWidth="32.0" text="12" />
+                              <Label alignment="CENTER" prefWidth="32.0" text="13" />
+                              <Label alignment="CENTER" prefWidth="32.0" text="14" />
+                              <Label alignment="CENTER" prefWidth="32.0" text="15" />
+                           </children>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                        </HBox>
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+      <TitledPane collapsible="false" layoutX="33.0" layoutY="14.0" prefHeight="170.0" prefWidth="552.0" text="類別" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <GridPane hgap="3.0" prefHeight="128.0" prefWidth="598.0" vgap="3.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="140.0" minWidth="10.0" prefWidth="70.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="244.0" minWidth="10.0" prefWidth="185.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="170.0" minWidth="10.0" prefWidth="86.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="185.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="群組" GridPane.halignment="RIGHT">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <ComboBox fx:id="cboAffiliation" onAction="#cboAffiliation_SelectedIndexChanged" prefHeight="23.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </ComboBox>
+                  <Label text="類型" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="位階/行動" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="國家" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="戰鬥順序" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <ComboBox fx:id="cboType" onAction="#cboType_SelectedIndexChanged" prefHeight="23.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="CENTER">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </ComboBox>
+                  <ComboBox fx:id="cboEchelon" onAction="#cboEchelon_SelectedIndexChanged" prefHeight="23.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </ComboBox>
+                  <ComboBox fx:id="cboCountry" onAction="#cboCountry_SelectedIndexChanged" prefHeight="23.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </ComboBox>
+                  <ComboBox fx:id="cboBattle" onAction="#cboBattle_SelectedIndexChanged" prefHeight="23.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </ComboBox>
+                  <TitledPane animated="false" collapsible="false" text="狀態" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="3">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <RadioButton fx:id="radPresent" mnemonicParsing="false" text="實際位" GridPane.halignment="CENTER" />
+                                    <RadioButton fx:id="radPlanned" mnemonicParsing="false" text="虛存位" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="30.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </TitledPane>
+               </children>
+            </GridPane>
+         </content>
+      </TitledPane>
+      <TitledPane animated="false" collapsible="false" layoutX="14.0" layoutY="262.0" prefHeight="170.0" prefWidth="151.0" text="屬性">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="135.0" prefWidth="139.0">
+               <children>
+                  <ImageView fx:id="imgViewSymbol" fitHeight="150.0" fitWidth="150.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+               <padding>
+                  <Insets bottom="-2.0" left="-2.0" right="-2.0" top="-2.0" />
+               </padding>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+   </children>
+</AnchorPane>
