@@ -48,23 +48,19 @@ import com.esri.arcgisruntime.geometry.SpatialReferences;
 import com.esri.arcgisruntime.layers.ArcGISTiledLayer;
 import com.esri.arcgisruntime.layers.ArcGISVectorTiledLayer;
 import com.esri.arcgisruntime.layers.FeatureLayer;
-import com.esri.arcgisruntime.layers.Layer;
 import com.esri.arcgisruntime.layers.RasterLayer;
 import com.esri.arcgisruntime.loadable.LoadStatus;
-import com.esri.arcgisruntime.localserver.LocalServer;
 import com.esri.arcgisruntime.mapping.ArcGISMap;
 import com.esri.arcgisruntime.mapping.Basemap;
-import com.esri.arcgisruntime.mapping.LayerList;
 import com.esri.arcgisruntime.mapping.MobileMapPackage;
-import com.esri.arcgisruntime.mapping.Viewpoint;
 import com.esri.arcgisruntime.mapping.view.AnalysisOverlay;
 import com.esri.arcgisruntime.mapping.view.Camera;
 import com.esri.arcgisruntime.mapping.view.Graphic;
 import com.esri.arcgisruntime.mapping.view.GraphicsOverlay;
 import com.esri.arcgisruntime.mapping.view.IdentifyGraphicsOverlayResult;
 import com.esri.arcgisruntime.mapping.view.LayerSceneProperties;
-import com.esri.arcgisruntime.mapping.view.MapView;
 import com.esri.arcgisruntime.mapping.view.LayerSceneProperties.SurfacePlacement;
+import com.esri.arcgisruntime.mapping.view.MapView;
 import com.esri.arcgisruntime.raster.Raster;
 import com.esri.arcgisruntime.symbology.ColorUtil;
 import com.esri.arcgisruntime.symbology.ModelSceneSymbol;
@@ -73,9 +69,6 @@ import com.esri.arcgisruntime.symbology.SimpleFillSymbol;
 import com.esri.arcgisruntime.symbology.SimpleLineSymbol;
 import com.esri.arcgisruntime.symbology.SimpleMarkerSceneSymbol;
 import com.esri.arcgisruntime.symbology.SimpleMarkerSceneSymbol.Style;
-
-import controller.MapApp2DController.ApState;
-
 import com.esri.arcgisruntime.symbology.SimpleMarkerSymbol;
 import com.esri.arcgisruntime.symbology.TextSymbol;
 
@@ -96,8 +89,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
@@ -105,7 +98,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
@@ -1060,7 +1052,7 @@ public class mainController implements Initializable {
 						mapPoint2.addDoneListener(() -> {
 							try {
 								Point p1 = mapPoint2.get();
-								Point mapAns1 = QueryLocation(p1, 1000.0);
+								Point mapAns1 = QueryLocation(p1);
 								if (mapAns1 == null)
 									return;
 								AddPointGraphics(mapAns1);
@@ -1082,7 +1074,7 @@ public class mainController implements Initializable {
 						mapPoint8.addDoneListener(() -> {
 							try {
 								Point p1 = mapPoint8.get();
-								Point mapAns1 = QueryLocation(p1, 1000.0);
+								Point mapAns1 = QueryLocation(p1);
 								if (mapAns1 == null)
 									return;
 								AddTmpPointGraphic(mapAns1);
@@ -1101,7 +1093,7 @@ public class mainController implements Initializable {
 						mapPoint7.addDoneListener(() -> {
 							try {
 								Point p1 = mapPoint7.get();
-								Point mapAns1 = QueryLocation(p1, 1000.0);
+								Point mapAns1 = QueryLocation(p1);
 								if (mapAns1 == null)
 									return;
 								AddTmpPointGraphic(mapAns1);
@@ -1120,7 +1112,7 @@ public class mainController implements Initializable {
 						mapPoint3.addDoneListener(() -> {
 							try {
 								Point p1 = mapPoint3.get();
-								Point mapAns1 = QueryLocation(p1, 1000.0);
+								Point mapAns1 = QueryLocation(p1);
 								if (mapAns1 == null)
 									return;
 								DrawSymbolStyles(Style.SPHERE, mapAns1);
@@ -1142,7 +1134,7 @@ public class mainController implements Initializable {
 						mapPoint4.addDoneListener(() -> {
 							try {
 								Point p1 = mapPoint4.get();
-								Point mapAns1 = QueryLocation(p1, 1000.0);
+								Point mapAns1 = QueryLocation(p1);
 								if (mapAns1 == null)
 									return;
 								DrawSymbolStyles(Style.CONE, mapAns1);
@@ -1164,7 +1156,7 @@ public class mainController implements Initializable {
 						mapPoint5.addDoneListener(() -> {
 							try {
 								Point p1 = mapPoint5.get();
-								Point mapAns1 = QueryLocation(p1, 1000.0);
+								Point mapAns1 = QueryLocation(p1);
 								if (mapAns1 == null)
 									return;
 								DrawSymbolStyles(Style.CYLINDER, mapAns1);
@@ -1186,7 +1178,7 @@ public class mainController implements Initializable {
 						mapPoint6.addDoneListener(() -> {
 							try {
 								Point p1 = mapPoint6.get();
-								Point mapAns1 = QueryLocation(p1, 1000.0);
+								Point mapAns1 = QueryLocation(p1);
 								if (mapAns1 == null)
 									return;
 								DrawSymbolStyles(Style.CUBE, mapAns1);
@@ -1209,7 +1201,7 @@ public class mainController implements Initializable {
 						mapPoint1.addDoneListener(() -> {
 							try {
 								Point p1 = mapPoint1.get();
-								Point mapAns1 = QueryLocation(p1, 1000);
+								Point mapAns1 = QueryLocation(p1);
 								if (mapAns1 == null)
 									return;
 								DrawModelSysmbol(mapAns1);
@@ -1235,7 +1227,7 @@ public class mainController implements Initializable {
 							mapPoint.addDoneListener(() -> {
 								try {
 									Point p = mapPoint.get();
-									Point pointLocation = QueryLocation(p, 1000.0);
+									Point pointLocation = QueryLocation(p);
 									if (pointLocation == null)
 										return;
 									switch (selectedShape) {
@@ -1371,7 +1363,7 @@ public class mainController implements Initializable {
 					mapPoint8.addDoneListener(() -> {
 						try {
 							Point p1 = mapPoint8.get();
-							Point mapAns1 = QueryLocation(p1, 500.0);
+							Point mapAns1 = QueryLocation(p1);
 							if (mapAns1 == null)
 								return;
 							AddTmpPointGraphic(mapAns1);
@@ -1397,7 +1389,7 @@ public class mainController implements Initializable {
 					mapPoint7.addDoneListener(() -> {
 						try {
 							Point p1 = mapPoint7.get();
-							Point mapAns1 = QueryLocation(p1, 1000.0);
+							Point mapAns1 = QueryLocation(p1);
 							if (mapAns1 == null)
 								return;
 							AddTmpPointGraphic(mapAns1);
@@ -1580,7 +1572,7 @@ public class mainController implements Initializable {
 		// gf.SaveGraphicsToJsonFile(MapManager.graphicsOverlay3D, null);
 	}
 
-	private Point QueryLocation(Point p, double z) {
+	private Point QueryLocation(Point p) {
 		// Create the custom dialog.
 		Dialog<Pair<String, String>> dialog4 = new Dialog<>();
 		dialog4.setTitle("座標設定");
@@ -1601,7 +1593,7 @@ public class mainController implements Initializable {
 		TextField txtLat = new TextField();
 		txtLat.setText(String.format("%.3f", p.getY()));
 		TextField txtHeight = new TextField();
-		txtHeight.setText(String.format("%.3f", z));
+		txtHeight.setText(String.format("%.3f", p.getZ()));
 
 		grid.add(new Label("經度:"), 0, 0);
 		grid.add(txtLon, 1, 0);
